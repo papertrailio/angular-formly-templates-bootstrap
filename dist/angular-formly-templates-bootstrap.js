@@ -1,4 +1,4 @@
-// angular-formly-templates-bootstrap version 4.4.1 built with ♥ by Astrism <astrisms@gmail.com>, Kent C. Dodds <kent@doddsfamily.us> (ó ì_í)=óò=(ì_í ò)
+// angular-formly-templates-bootstrap version 6.0.0 built with ♥ by Astrism <astrisms@gmail.com>, Kent C. Dodds <kent@doddsfamily.us> (ó ì_í)=óò=(ì_í ò)
 
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -73,18 +73,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports['default'] = function (ngModule) {
 	  ngModule.config(addCheckboxType);
 	
-	  function addCheckboxType(formlyConfigProvider, formlyBootstrapApiCheck) {
-	    var c = formlyBootstrapApiCheck;
+	  function addCheckboxType(formlyConfigProvider) {
 	    formlyConfigProvider.setType({
 	      name: 'multiCheckbox',
 	      template: __webpack_require__(21),
 	      wrapper: ['bootstrapLabel', 'bootstrapHasError'],
-	      apiCheck: {
-	        templateOptions: c.shape({
-	          options: c.arrayOf(c.object),
-	          labelProp: c.string.optional,
-	          valueProp: c.string.optional
-	        })
+	      apiCheck: function apiCheck(check) {
+	        return {
+	          templateOptions: {
+	            options: check.arrayOf(check.object),
+	            labelProp: check.string.optional,
+	            valueProp: check.string.optional
+	          }
+	        };
 	      },
 	      defaultOptions: {
 	        noFormControl: false,
@@ -95,7 +96,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	          }
 	        }
 	      },
-	      apiCheckInstance: c,
 	      controller: /* @ngInject */["$scope", function controller($scope) {
 	        var to = $scope.to;
 	        var opts = $scope.options;
@@ -123,9 +123,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }, true);
 	
 	        function checkValidity(expressionValue) {
-	          var valid = angular.isArray($scope.model[opts.key]) && $scope.model[opts.key].length > 0 && expressionValue;
+	          var valid;
 	
-	          $scope.fc.$setValidity('required', valid);
+	          if ($scope.to.required) {
+	            valid = angular.isArray($scope.model[opts.key]) && $scope.model[opts.key].length > 0 && expressionValue;
+	
+	            $scope.fc.$setValidity('required', valid);
+	          }
 	        }
 	
 	        function setModel() {
@@ -161,7 +165,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }]
 	    });
 	  }
-	  addCheckboxType.$inject = ["formlyConfigProvider", "formlyBootstrapApiCheck"];
+	  addCheckboxType.$inject = ["formlyConfigProvider"];
 	};
 
 	module.exports = exports['default'];
@@ -205,21 +209,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports['default'] = function (ngModule) {
 	  ngModule.config(addWrappers);
 	
-	  function addWrappers(formlyConfigProvider, formlyBootstrapApiCheck) {
-	    var c = formlyBootstrapApiCheck;
+	  function addWrappers(formlyConfigProvider) {
 	    formlyConfigProvider.setWrapper([{
 	      name: 'bootstrapLabel',
 	      template: __webpack_require__(17),
-	      apiCheck: {
-	        templateOptions: c.shape({
-	          label: c.string,
-	          required: c.bool.optional
-	        })
-	      },
-	      apiCheckInstance: c
+	      apiCheck: function apiCheck(check) {
+	        return {
+	          templateOptions: {
+	            label: check.string,
+	            required: check.bool.optional
+	          }
+	        };
+	      }
 	    }, { name: 'bootstrapHasError', template: __webpack_require__(18) }]);
 	  }
-	  addWrappers.$inject = ["formlyConfigProvider", "formlyBootstrapApiCheck"];
+	  addWrappers.$inject = ["formlyConfigProvider"];
 	};
 
 	module.exports = exports['default'];
@@ -291,8 +295,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports['default'] = function (ngModule) {
 	  ngModule.config(addRadioType);
 	
-	  function addRadioType(formlyConfigProvider, formlyBootstrapApiCheck) {
-	    var c = formlyBootstrapApiCheck;
+	  function addRadioType(formlyConfigProvider) {
 	    formlyConfigProvider.setType({
 	      name: 'radio',
 	      template: __webpack_require__(19),
@@ -300,17 +303,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	      defaultOptions: {
 	        noFormControl: false
 	      },
-	      apiCheck: {
-	        templateOptions: c.shape({
-	          options: c.arrayOf(c.object),
-	          labelProp: c.string.optional,
-	          valueProp: c.string.optional
-	        })
-	      },
-	      apiCheckInstance: c
+	      apiCheck: function apiCheck(check) {
+	        return {
+	          templateOptions: {
+	            options: check.arrayOf(check.object),
+	            labelProp: check.string.optional,
+	            valueProp: check.string.optional
+	          }
+	        };
+	      }
 	    });
 	  }
-	  addRadioType.$inject = ["formlyConfigProvider", "formlyBootstrapApiCheck"];
+	  addRadioType.$inject = ["formlyConfigProvider"];
 	};
 
 	module.exports = exports['default'];
@@ -328,21 +332,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports['default'] = function (ngModule) {
 	  ngModule.config(addCheckboxType);
 	
-	  function addCheckboxType(formlyConfigProvider, formlyBootstrapApiCheck) {
-	    var c = formlyBootstrapApiCheck;
+	  function addCheckboxType(formlyConfigProvider) {
 	    formlyConfigProvider.setType({
 	      name: 'checkbox',
 	      template: __webpack_require__(20),
 	      wrapper: ['bootstrapHasError'],
-	      apiCheck: {
-	        templateOptions: c.shape({
-	          label: c.string
-	        })
-	      },
-	      apiCheckInstance: c
+	      apiCheck: function apiCheck(check) {
+	        return {
+	          templateOptions: {
+	            label: check.string
+	          }
+	        };
+	      }
 	    });
 	  }
-	  addCheckboxType.$inject = ["formlyConfigProvider", "formlyBootstrapApiCheck"];
+	  addCheckboxType.$inject = ["formlyConfigProvider"];
 	};
 
 	module.exports = exports['default'];
@@ -364,7 +368,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    prefix: 'angular-formly-bootstrap'
 	  }
 	}));
-	ngModule.constant('formlyBootstrapVersion', ("4.4.1"));
+	ngModule.constant('formlyBootstrapVersion', ("6.0.0"));
 	
 	__webpack_require__(5)(ngModule);
 	__webpack_require__(6)(ngModule);
@@ -415,8 +419,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	  var template = '<select class="form-control" ng-model="model[options.key]"></select>';
 	
-	  function addSelectType(formlyConfigProvider, formlyBootstrapApiCheck) {
-	    var c = formlyBootstrapApiCheck;
+	  function addSelectType(formlyConfigProvider) {
 	    formlyConfigProvider.setType({
 	      name: 'select',
 	      template: template,
@@ -430,18 +433,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	          })
 	        };
 	      },
-	      apiCheck: {
-	        templateOptions: c.shape({
-	          options: c.arrayOf(c.object),
-	          labelProp: c.string.optional,
-	          valueProp: c.string.optional,
-	          groupProp: c.string.optional
-	        })
-	      },
-	      apiCheckInstance: c
+	      apiCheck: function apiCheck(check) {
+	        return {
+	          templateOptions: {
+	            options: check.arrayOf(check.object),
+	            labelProp: check.string.optional,
+	            valueProp: check.string.optional,
+	            groupProp: check.string.optional
+	          }
+	        };
+	      }
 	    });
 	  }
-	  addSelectType.$inject = ["formlyConfigProvider", "formlyBootstrapApiCheck"];
+	  addSelectType.$inject = ["formlyConfigProvider"];
 	};
 
 	module.exports = exports['default'];
@@ -459,8 +463,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports['default'] = function (ngModule) {
 	  ngModule.config(addTextareaType);
 	
-	  function addTextareaType(formlyConfigProvider, formlyBootstrapApiCheck) {
-	    var c = formlyBootstrapApiCheck;
+	  function addTextareaType(formlyConfigProvider) {
 	    formlyConfigProvider.setType({
 	      name: 'textarea',
 	      template: '<textarea class="form-control" ng-model="model[options.key]"></textarea>',
@@ -471,16 +474,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	          cols: { attribute: 'cols' }
 	        }
 	      },
-	      apiCheck: {
-	        templateOptions: c.shape({
-	          rows: c.number.optional,
-	          cols: c.number.optional
-	        })
-	      },
-	      apiCheckInstance: c
+	      apiCheck: function apiCheck(check) {
+	        return {
+	          templateOptions: {
+	            rows: check.number.optional,
+	            cols: check.number.optional
+	          }
+	        };
+	      }
 	    });
 	  }
-	  addTextareaType.$inject = ["formlyConfigProvider", "formlyBootstrapApiCheck"];
+	  addTextareaType.$inject = ["formlyConfigProvider"];
 	};
 
 	module.exports = exports['default'];
@@ -562,7 +566,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "<div>\n  <label for=\"{{id}}\" class=\"control-label\">\n    {{to.label}}\n    {{to.required ? '*' : ''}}\n  </label>\n  <formly-transclude></formly-transclude>\n</div>\n"
+	module.exports = "<div>\n  <label for=\"{{id}}\" class=\"control-label\" ng-if=\"to.label\">\n    {{to.label}}\n    {{to.required ? '*' : ''}}\n  </label>\n  <formly-transclude></formly-transclude>\n</div>\n"
 
 /***/ },
 /* 18 */
