@@ -29,7 +29,7 @@
     "angular": ">=1.2.x",
     "angular-formly": ">=4.0.5",
     "api-check": ">=6.0.10",
-    "bootstrap": ">=3.2.0"
+    "bootstrap-sass-official": ">=3.2.0"
   },
   "devDependencies": {
     "chai": "~1.9.1",
